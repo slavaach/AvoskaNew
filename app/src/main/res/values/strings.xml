@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Авоська New</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="add_reference">Добавляем </string>
+    <string name="update_reference">Изменяем </string>
+    <string name="error_button">Лады</string>
+    <string name="empty"></string>
+    <string name="delete_item">Удалить</string>
+    <string name="cancel_item">Ой,не надо</string>
+    <string name="choose_homes">Выбрать</string>
+    <string name="delete_item_title">Удаление!</string>
+
+    <string name="error_title">Ой, у нас ошибка</string>
+
+
+    <string name="add_item_button_ok">Добавить</string>
+    <string name="update_item_button_ok">Изменить</string>
+
+
+    <string name="temper_title">Температура = </string>
+    <string name="temper_post"> Цельсия</string>
+    <string name="temper_null">нам температура не известна</string>
+    <string name="wind_title">Ветер = </string>
+    <string name="wind_post"> м/с</string>
+    <string name="wind_null">нам скорость ветра не известна</string>
+
+
+    <string name="weather_key">57a406e15b942704028b2286caed4d56</string>
+
+    <string name="subs_list">список</string>
+    <string name="sub_details">детали</string>
+
+</resources>

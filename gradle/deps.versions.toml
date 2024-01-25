@@ -1,0 +1,274 @@
+[versions]
+
+sdk-compile = "34"
+sdk-min = "26"
+sdk-target = "33"
+jdk = "17"
+
+#region Gradle
+android = "8.1.4"
+google-services = "4.3.14"
+crashlytics-gradle = "2.9.2"
+ben-manes = "0.48.0"
+#endregion
+
+#region Detekt
+detekt = "1.22.0"
+#endregion
+
+#region Kotlin
+kotlin = "1.9.21"
+coroutines = "1.7.3"
+#endregion
+
+#region AndroidX
+androidx-appcompat = "1.6.1"
+androidx-fragment = "1.6.2"
+androidx-constraintlayout = "2.1.4"
+androidx-lifecycle = "2.6.2"
+androidx-lifecycle-extensions = "2.2.0"
+androidx-core-ktx = "1.10.1"
+androidx-activity = "1.8.1"
+androidx-recyclerview = "1.3.0"
+androidx-viewpager2 = "1.0.0"
+androidx-biometric = "1.1.0"
+androidx-swiperefreshlayout = "1.1.0"
+androidx-camera = "1.3.0"
+androidx-security-crypto = "1.0.0"
+androidx-room = "2.6.1"
+androidx-work = "2.8.1"
+#endregion
+
+#region Google
+google-play = "1.8.1"
+google-maps-utils = "1.3.3"
+google-barcode = "17.1.0"
+google-play-services-maps = "18.0.0"
+google-play-services-location = "18.0.0"
+google-zxing = "3.4.1"
+#endregion
+
+#region RuStore
+rustore-mapkit = "1.0.306"
+rustore-appupdate = "0.2.0"
+rustore-pushclient = "0.6.0"
+#endregion
+
+#region Other
+okhttp = "4.11.0"
+retrofit = "2.9.0"
+gson = "2.10"
+koin = "3.5.1"
+koin_compouse = "3.5.3"
+material = "1.9.0"
+okhttpprofiler = "1.0.8"
+sdp = "1.0.6"
+cicerone = "7.1"
+voyager = "1.0.0"
+inputMask = "6.1.0"
+timber = "4.7.1"
+jakewharton-threetenabp = "1.2.4"
+bouncycastle = "1.52"
+coil = "1.0.0"
+androidsvg = "1.4"
+zxing-embedded = "4.3.0"
+android-pdf-viewer = "3.2.0-beta.1"
+glide = "4.12.0"
+spongycastle ="1.54.0.0"
+uce-handler = "1.4"
+#endregion
+
+#region compose
+compose_compiler_version = "1.8.2"
+compose_version = "1.8.2"
+compose_viewmodel_version = "2.7.0"
+compose_lifecycle_version = "2.6.1"
+compose_ui_version = "1.5.4"
+compose-navigation = "2.7.6"
+compose-material3 = "1.1.2"
+#endregion
+
+
+#region Tests
+test-junit = "4.13.2"
+test-ext-junit = "1.1.5"
+test-runner = "1.5.2"
+test-rules = "1.5.0"
+test-core-ktx = "1.5.0"
+test-robolectric = "4.5.1"
+test-google-truth = "1.0.1"
+test-mockk = "1.10.0"
+test-kotlintest = "2.0.7"
+test-mockwebserver = "4.1.0"
+test-arch-core-testing = "1.1.1"
+test-mockito-kotlin = "4.1.0"
+test-mockito-inline = "4.1.0"
+test-mockito-core = "3.8.0"
+test-junit-jupiter = "5.7.1"
+test-espresso = "3.5.1"
+#endregion
+
+#region Firebase
+firebase-bom = "25.13.0" # https://firebase.google.com/docs/android/learn-more?hl=ru
+#endregion
+
+[plugins]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+
+[libraries]
+
+#region Gradle
+gradlePlugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+plugin-android = { module = "com.android.tools.build:gradle", version.ref = "android" }
+plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+plugin-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics-gradle" }
+plugin-google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
+plugin-ben-manes = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "ben-manes" }
+#endregion
+
+#region AndroidX
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidx-lifecycle-extensions" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "androidx-recyclerview" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "androidx-viewpager2" }
+androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "androidx-biometric" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "androidx-swiperefreshlayout" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "androidx-camera" }
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "androidx-camera" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "androidx-camera" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "androidx-camera" }
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "androidx-security-crypto" }
+androidx-work-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
+androidx-room-guava = { module = "androidx.room:room-guava", version.ref = "androidx-room" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidx-room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
+androidx-room-rxjava2 = { module = "androidx.room:room-rxjava2", version.ref = "androidx-room" }
+androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "androidx-room" }
+#endregion
+
+#region Google
+google-play-core-ktx = { module = "com.google.android.play:core-ktx", version.ref = "google-play" }
+google-maps-utils = { module = "com.google.maps.android:android-maps-utils", version.ref = "google-maps-utils" }
+google-barcode = { module = "com.google.mlkit:barcode-scanning", version.ref = "google-barcode" }
+google-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "google-play-services-maps" }
+google-play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "google-play-services-location" }
+google-zxing = { module = "com.google.zxing:core", version.ref = "google-zxing" }
+#endregion
+
+#region RuStore
+rustore-mapkit = { module = "ru.rustore.geo:mapkit", version.ref = "rustore-mapkit" }
+rustore-appupdate = { module = "ru.rustore.sdk:appupdate", version.ref = "rustore-appupdate" }
+rustore-pushclient = { module = "ru.rustore.sdk:pushclient", version.ref = "rustore-pushclient" }
+#endregion
+
+#region DI
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android" }
+koin-android-test = { module = "io.insert-koin:koin-android-test"}
+koin-compouse = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin_compouse" }
+#endregion
+
+#region Other
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+okhttpprofiler = { module = "com.localebro:okhttpprofiler", version.ref = "okhttpprofiler" }
+sdp = { module = "com.intuit.sdp:sdp-android", version.ref = "sdp" }
+cicerone = { module = "com.github.terrakok:cicerone", version.ref = "cicerone" }
+inputMask = { module = "com.github.RedMadRobot:input-mask-android", version.ref = "inputMask" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+jakewharton-threetenabp = { module = "com.jakewharton.threetenabp:threetenabp", version.ref = "jakewharton-threetenabp" }
+bouncycastle = { module = "org.bouncycastle:bcprov-jdk15on", version.ref = "bouncycastle" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+androidsvg = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvg" }
+zxing-embedded = { module = "com.journeyapps:zxing-android-embedded", version.ref = "zxing-embedded" }
+android-pdf-viewer = { module = "com.github.mhiew:android-pdf-viewer", version.ref = "android-pdf-viewer" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+spongycastle-core = { module = "com.madgag.spongycastle:core", version.ref = "spongycastle" }
+spongycastle-prov = { module = "com.madgag.spongycastle:prov", version.ref = "spongycastle" }
+spongycastle-pkix = { module = "com.madgag.spongycastle:pkix", version.ref = "spongycastle" }
+spongycastle-pg = { module = "com.madgag.spongycastle:pg", version.ref = "spongycastle" }
+uce-handler = { module = "com.github.RohitSurwase.UCE-Handler:uce_handler", version.ref = "uce-handler" }
+#endregion
+
+
+#region voyager
+voyager_navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager_screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
+voyager_bottom_sheet_navigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
+voyager_tab_navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
+voyager_transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+voyager_koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
+voyager_livedata = { module = "cafe.adriel.voyager:voyager-livedata", version.ref = "voyager" }
+#endregion
+
+#region compose
+android-compose = { module = "androidx.activity:activity-compose", version.ref = "compose_version" }
+android-compose_icon = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose_ui_version" }
+android-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose_material3" }
+android-compose_lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "compose_lifecycle_version" }
+android-compose_viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "compose_viewmodel_version" }
+android-ui-toolin-compose = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose_ui_version" }
+android-material-compose = { module = "androidx.compose.material:material", version.ref = "compose_ui_version" }
+android-ui-test-compose = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose_ui_version" }
+android-debug-ui-tooling-compose = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose_ui_version" }
+android-debug-test-manifest-compose = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose_ui_version" }
+android-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
+
+#endregion
+
+#region Network
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+#endregion
+
+#region Test
+test-junit = { module = "junit:junit", version.ref = "test-junit" }
+test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "test-ext-junit" }
+test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
+test-rules = { module = "androidx.test:rules", version.ref = "test-rules" }
+test-core-ktx = { module = "androidx.test:core-ktx", version.ref = "test-core-ktx" }
+test-robolectric = { module = "org.robolectric:robolectric", version.ref = "test-robolectric" }
+test-mockk = { module = "io.mockk:mockk", version.ref = "test-mockk" }
+test-google-truth = { module = "com.google.truth:truth", version.ref = "test-google-truth" }
+test-kotlintest = { module = "io.kotlintest:kotlintest", version.ref = "test-kotlintest" }
+test-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "test-mockwebserver" }
+test-arch-core-testing = { module = "android.arch.core:core-testing", version.ref = "test-arch-core-testing" }
+test-mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "test-mockito-kotlin" }
+test-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "test-mockito-inline" }
+test-mockito-core = { module = "org.mockito:mockito-core", version.ref = "test-mockito-core" }
+test-junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "test-junit-jupiter" }
+test-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "test-junit-jupiter" }
+test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "test-espresso" }
+test-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "test-espresso" }
+#endregion
+
+#region Firebase
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-messaging = { module = 'com.google.firebase:firebase-messaging' }
+firebase-perf = { module = 'com.google.firebase:firebase-perf' }
+firebase-analytics = { module = 'com.google.firebase:firebase-analytics' }
+firebase-crashlytics-ktx = { module = 'com.google.firebase:firebase-crashlytics-ktx' }
+firebase-firestore-ktx = { module = 'com.google.firebase:firebase-firestore-ktx' }
+firebase-auth = { module = 'com.google.firebase:firebase-auth' }
+firebase-storage = { module = 'com.google.firebase:firebase-storage' }
+#endregion
+
+#region Detekt
+detekt-api = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
+detekt-test = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+detekt-rules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
+#endregion

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>EmptyFunctionBlock:NullBottomBar.kt${}</ID>
+    <ID>ImplicitDefaultLocale:AppUnhandledExceptionHandler.kt$AppUnhandledExceptionHandler$String.format( "Ex type: %s Message:%s \n", exNode .javaClass.name, exNode.message )</ID>
+    <ID>LongMethod:DefaultTopBar.kt$@OptIn(ExperimentalFoundationApi::class) @Composable fun DefaltTopAppBar(viewModel: MainViewModel)</ID>
+    <ID>MagicNumber:BuyFrgm.kt$BuyFrgm$80</ID>
+    <ID>MagicNumber:BuyListComponent.kt$132</ID>
+    <ID>MagicNumber:BuyListComponent.kt$20</ID>
+    <ID>MagicNumber:Color.kt$0x50bf7e2a</ID>
+    <ID>MagicNumber:Color.kt$0xFF03DAC5</ID>
+    <ID>MagicNumber:Color.kt$0xFF212121</ID>
+    <ID>MagicNumber:Color.kt$0xFF35441c</ID>
+    <ID>MagicNumber:Color.kt$0xFF3700B3</ID>
+    <ID>MagicNumber:Color.kt$0xFF6200EE</ID>
+    <ID>MagicNumber:Color.kt$0xFFBB86FC</ID>
+    <ID>MagicNumber:Color.kt$0xFFcfdfb3</ID>
+    <ID>MagicNumber:Color.kt$0xFFedc37c</ID>
+    <ID>MagicNumber:CustomFrgm.kt$CustomFrgm$80</ID>
+    <ID>MagicNumber:DefaultTopBar.kt$114</ID>
+    <ID>MagicNumber:DefaultTopBar.kt$27</ID>
+    <ID>MagicNumber:PulsateClick.kt$0.7f</ID>
+    <ID>MagicNumber:ReferenceFrgm.kt$ReferenceFrgm$7</ID>
+    <ID>MagicNumber:ReferenceFrgm.kt$ReferenceFrgm$80</ID>
+    <ID>MagicNumber:WeatherViewModel.kt$WeatherViewModel$273.15</ID>
+    <ID>MaxLineLength:CustomDao.kt$CustomDao$"SELECT cs.id , cs.name , cs.home , cs.sale , s.name as salename , h.name as homename , cs.isBuy , s.[order] as saleOrder FROM Custom cs left join Sale s on s.id = cs.sale left join Home h on h.id = cs.home where cs.home = :home order by cs.id Desc "</ID>
+    <ID>MaxLineLength:CustomDao.kt$CustomDao$"SELECT cs.id , cs.name , cs.home , cs.sale , s.name as salename , h.name as homename , cs.isBuy , s.[order] as saleOrder FROM Custom cs left join Sale s on s.id = cs.sale left join Home h on h.id = cs.home where cs.home IN (:home) order by cs.id Desc "</ID>
+    <ID>MaxLineLength:MigrationFrom1To2.kt$MigrationFrom1To2$// database.execSQL("CREATE TABLE IF NOT EXISTS `$tempTableName` (`memberId` TEXT, `name` TEXT, `fullName` TEXT NOT NULL, `engName` TEXT, `rusName` TEXT, `bic` TEXT NOT NULL, `md5hash` TEXT NOT NULL, `svgImage` TEXT, `fiasId` TEXT, `address` TEXT, `latitude` TEXT, `longitude` TEXT, `swiftList` TEXT, `inn` TEXT, `kpp` TEXT, `registrationNumber` TEXT, `registrationDate` TEXT, `bankType` TEXT, `bankTypeCode` TEXT, `bankServiceType` TEXT, `bankServiceTypeCode` TEXT, `accountList` TEXT, PRIMARY KEY(`bic`))")</ID>
+    <ID>MaxLineLength:MigrationFrom1To2.kt$MigrationFrom1To2$// database.execSQL("INSERT or REPLACE INTO '$tempTableName' SELECT `memberId`, `name`, `fullName`, `engName` TEXT, `rusName` TEXT, `bic`, `md5hash`, `svgImage`, `fiasId`, `address`, `latitude`, `longitude`, `swiftList`, `inn`, `kpp`, `registrationNumber`, `registrationDate`, `bankType`, `bankTypeCode`, `bankServiceType`, `bankServiceTypeCode`, `accountList` FROM `full_info_banks`")</ID>
+    <ID>MaximumLineLength:ru.yandex.slavaach.nullapplicatoin.features.custom.data.CustomDao.kt:27</ID>
+    <ID>MaximumLineLength:ru.yandex.slavaach.nullapplicatoin.features.custom.data.CustomDao.kt:32</ID>
+    <ID>NoWildcardImports:ru.yandex.slavaach.nullapplicatoin.ExampleUnitTest.kt:3</ID>
+    <ID>ThrowingExceptionsWithoutMessageOrCause:LocalDateTimeTypeAdapter.kt$LocalDateTimeTypeAdapter$IllegalArgumentException()</ID>
+    <ID>TooGenericExceptionCaught:AddDialog.kt$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:CustomViewModel.kt$CustomViewModel$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:ReferenceViewModel.kt$ReferenceViewModel$e: Exception</ID>
+    <ID>TooManyFunctions:BuyViewModel.kt$BuyViewModel : BaseViewModel</ID>
+    <ID>TooManyFunctions:CustomViewModel.kt$CustomViewModel : BaseViewModel</ID>
+    <ID>TooManyFunctions:MainViewModel.kt$MainViewModel : BaseViewModelKoinComponent</ID>
+    <ID>TooManyFunctions:ReferenceViewModel.kt$ReferenceViewModel : BaseViewModel</ID>
+    <ID>UnnecessaryAbstractClass:BaseFrgm.kt$BaseFrgm$BaseFrgm</ID>
+    <ID>UnusedPrivateMember:CustomListComponent.kt$viewModel: BaseViewModel = object : BaseViewModel() {}</ID>
+    <ID>UnusedPrivateMember:DatabaseModule.kt$val ALL_MIGRATIONS = arrayOf&lt;Migration&gt;( MigrationFrom1To2(), )</ID>
+    <ID>UnusedPrivateMember:MigrationFrom1To2.kt$MigrationFrom1To2$val tempTableName = "temp_full"</ID>
+    <ID>UnusedPrivateMember:NullBottomBar.kt$viewModel: BaseViewModel</ID>
+    <ID>UnusedPrivateMember:ReferenceListComponent.kt$viewModel: BaseViewModel = object : BaseViewModel() {}</ID>
+    <ID>UnusedPrivateMember:WeatherListConponent.kt$viewModel: BaseViewModel = object : BaseViewModel() {}</ID>
+    <ID>UtilityClassWithPublicConstructor:GlobalModule.kt$GlobalModule</ID>
+    <ID>VariableNaming:BaseViewModel.kt$BaseViewModel$val _state = MutableStateFlow( StateList(listOf()) )</ID>
+    <ID>VariableNaming:CustomViewModel.kt$CustomViewModel$val _sale = MutableStateFlow( SaleList(listOf()) )</ID>
+    <ID>VariableNaming:MainViewModel.kt$MainViewModel$val _home = MutableStateFlow( HomeList(listOf()) )</ID>
+    <ID>WildcardImport:ExampleUnitTest.kt$import org.junit.Assert.*</ID>
+  </CurrentIssues>
+</SmellBaseline>
