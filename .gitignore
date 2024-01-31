@@ -89,3 +89,4 @@ lint/tmp/
 # MacOS
 .DS_Store
 /.idea/vcs.xml
+/app/googleDev/release/output-metadata.json
