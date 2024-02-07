@@ -10,9 +10,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import ru.yandex.slavaach.nullapplicatoin.component.topBar.ClickOnTitle
+import ru.yandex.slavaach.nullapplicatoin.component.topBar.DefaltTopAppBarUseCase
 import ru.yandex.slavaach.nullapplicatoin.component.topBar.TypeTopBar
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.DataForAlert
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.BaseViewModel
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TitleName
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.Transfer
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TransferMemorySource
 import ru.yandex.slavaach.nullapplicatoin.features.custom.data.SettingUseCase
 import ru.yandex.slavaach.nullapplicatoin.features.reference.data.home.Home
 import ru.yandex.slavaach.nullapplicatoin.features.reference.data.home.HomeUseCase
@@ -25,6 +29,8 @@ class MainViewModel(
     val homeNav: HomeNav,
     var homeUseCase: HomeUseCase,
     val settingUseCase: SettingUseCase,
+    val transferMemorySource: TransferMemorySource,
+    val defaltTopAppBarUseCase: DefaltTopAppBarUseCase,
 ) : BaseViewModel(), KoinComponent {
 
     val state = mutableStateOf(
@@ -51,10 +57,48 @@ class MainViewModel(
     )
 
     private var listHomeForBuy: List<Long> = listOf()
+
     init {
         super.onInit()
         updateList()
         mainViewModelHolder.viewModelRef = WeakReference(this)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.observeClickOnTitleSource().collect {
+                setClickOnTitle(it.it)
+            }
+        }
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.observeSubTitleNameSource().collect {
+                setSubTitleName(it.name)
+            }
+        }
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.observeIconTitleSource().collect {
+                setIconTitle(it.icon)
+            }
+        }
+        viewModelScope.launch {
+            transferMemorySource.observeTransferEvent().collect {
+                if (it is Transfer.UpdateHome) updateList()
+            }
+        }
+
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.observeTitleNameSource().collect {
+                when {
+                    it is TitleName.SetTitleNameHome -> {
+                        setTitleName(state.value.nameHomeForCustom)
+                    }
+
+                    it is TitleName.SetTitleNameMulti -> {
+                        setTitleNameMulti()
+                    }
+                    it is TitleName.SetTitleName -> {
+                        setTitleName(it.name)
+                    }
+                }
+            }
+        }
     }
 
     fun setViewModel(context: Context) {
@@ -72,7 +116,9 @@ class MainViewModel(
     fun setHomeForBuy() {
         viewModelScope.launch { settingUseCase.update(state.value.idHomeForBuy) }
         setTitleNameMulti()
-        setUpDateSettingBuy?.update(state.value.idHomeForBuy)
+        viewModelScope.launch {
+            transferMemorySource.emitEvent(Transfer.UpdateHomeSelectBuy(state.value.idHomeForBuy))
+        }
         listHomeForBuy = state.value.idHomeForBuy
     }
 
@@ -87,8 +133,11 @@ class MainViewModel(
                 viewModelScope.launch { settingUseCase.update(id) }
                 state.value = state.value.copy(idHomeForCustom = id, nameHomeForCustom = name)
                 setTitleName(name)
-                setUpDateSettingHome?.update(id)
+                viewModelScope.launch {
+                    transferMemorySource.emitEvent(Transfer.UpdateHomeSelectCustom(id))
+                }
             }
+
             ClickOnTitle.CLICK_MULTI -> {
                 val lisBuy = ArrayList(state.value.idHomeForBuy)
                 val isSelect = lisBuy.contains(id)
@@ -100,9 +149,11 @@ class MainViewModel(
                     state.value = state.value.copy(idHomeForBuy = lisBuy)
                 }
             }
+
             else -> {}
         }
     }
+
     fun updateList() {
         viewModelScope.launch {
             _home.value =
@@ -110,6 +161,7 @@ class MainViewModel(
             settingUseCase.select()?.let { sh ->
                 _home.value.list.firstOrNull { sh.idHome == it.id }?.let {
                     state.value = state.value.copy(idHomeForCustom = it.id, nameHomeForCustom = it.name)
+                    transferMemorySource.emitEvent(Transfer.UpdateHomeSelectCustom(it.id))
                     if (state.value.clickOnTitle == ClickOnTitle.CLICK_ONE) setTitleName(it.name)
                 }
                 state.value = state.value.copy(idHomeForBuy = sh.idBuyHome)
@@ -189,15 +241,5 @@ class MainViewModel(
 
     fun openWeather() {
         homeNav.openWeather()
-    }
-    var setUpDateSettingHome: upDateSettingHome? = null
-    var setUpDateSettingBuy: upDateSettingBuy? = null
-
-    interface upDateSettingHome {
-        fun update(id: Long)
-    }
-
-    interface upDateSettingBuy {
-        fun update(id: List<Long>)
     }
 }

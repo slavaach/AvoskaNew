@@ -8,10 +8,16 @@ import org.threeten.bp.LocalDateTime
 import ru.yandex.slavaach.nullapplicatoin.ActivityContextHolder
 import ru.yandex.slavaach.nullapplicatoin.MainViewModel
 import ru.yandex.slavaach.nullapplicatoin.MainViewModelHolder
+import ru.yandex.slavaach.nullapplicatoin.component.topBar.DefaltTopAppBarUseCase
 import ru.yandex.slavaach.nullapplicatoin.core.data.gson.LocalDateJsonDeserializer
 import ru.yandex.slavaach.nullapplicatoin.core.data.gson.LocalDateTimeTypeAdapter
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.AlertManager
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.ErrorResolver
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.ClickOnTitleSource
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.IconTitleSource
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SubTitleNameSource
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TitleNameSource
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TransferMemorySource
 import ru.yandex.slavaach.nullapplicatoin.features.custom.data.SettingUseCase
 import ru.yandex.slavaach.nullapplicatoin.navigation.HomeNav
 
@@ -40,6 +46,13 @@ val appModule = module {
         }
     }*/
 
-    viewModel { MainViewModel(get(), get(), get(), get(), get(),) }
+    viewModel { MainViewModel(get(), get(), get(), get(), get(), get(), get(),) }
     single { HomeNav(get(), get(), get(),) }
+
+    single { TransferMemorySource() }
+    single { TitleNameSource() }
+    single { ClickOnTitleSource() }
+    single { SubTitleNameSource() }
+    single { IconTitleSource() }
+    single { DefaltTopAppBarUseCase(get(), get(), get(), get(),) }
 }

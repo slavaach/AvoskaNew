@@ -43,7 +43,7 @@ class ReferenceFrgm(
         val stateList = viewModel.stateOld.collectAsState()
         val allList = stateList.value.list
 
-        LaunchedEffect(0) {
+        LaunchedEffect(name) {
             viewModel.setTitleName(name)
             viewModel.setSubTitleName("")
             viewModel.setIconTitle(R.drawable.reference)

@@ -9,7 +9,7 @@ import ru.yandex.slavaach.nullapplicatoin.features.reference.data.sale.SaleUseCa
 val referenceModule = module {
     // Data
     viewModel { (useCase: ReferenceUseCase) ->
-        ReferenceViewModel(useCase, get(), get(), get())
+        ReferenceViewModel(useCase, get(), get(), get(), get(),)
     }
 
     single { HomeUseCase(get()) }

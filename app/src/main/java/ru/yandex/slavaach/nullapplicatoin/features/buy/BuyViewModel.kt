@@ -2,8 +2,6 @@ package ru.yandex.slavaach.nullapplicatoin.features.buy
 
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.launch
-import ru.yandex.slavaach.nullapplicatoin.MainViewModel
-import ru.yandex.slavaach.nullapplicatoin.MainViewModelHolder
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.OnClickFilterBuyBottomBar
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.OnClickOrderBuyBottomBar
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.OnClickSaveBuyBottomBar
@@ -11,9 +9,16 @@ import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.TypeBottomBar
 import ru.yandex.slavaach.nullapplicatoin.component.list.TypeListComponent
 import ru.yandex.slavaach.nullapplicatoin.component.list.comp.BuyListComponent
 import ru.yandex.slavaach.nullapplicatoin.component.topBar.ClickOnTitle
+import ru.yandex.slavaach.nullapplicatoin.component.topBar.DefaltTopAppBarUseCase
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.AlertManager
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.BaseViewModel
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.TypeOnClick
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetClickOnTitle
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetIconTitle
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetSubTitleName
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TitleName
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.Transfer
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TransferMemorySource
 import ru.yandex.slavaach.nullapplicatoin.features.custom.data.Custom
 import ru.yandex.slavaach.nullapplicatoin.features.custom.data.CustomUseCase
 import ru.yandex.slavaach.nullapplicatoin.features.custom.data.SettingUseCase
@@ -22,7 +27,8 @@ class BuyViewModel(
     var customUseCase: CustomUseCase,
     val settingUseCase: SettingUseCase,
     val alertManager: AlertManager,
-    val mainViewModelHolder: MainViewModelHolder,
+    val transferMemorySource: TransferMemorySource,
+    val defaltTopAppBarUseCase: DefaltTopAppBarUseCase,
 ) : BaseViewModel() {
     val state = mutableStateOf(
         State(
@@ -53,30 +59,29 @@ class BuyViewModel(
         super.onInit()
         updateList()
 
-        mainViewModelHolder.viewModelRef?.get()?.setUpDateSettingBuy = object : MainViewModel.upDateSettingBuy {
-            override fun update(id: List<Long>) {
-                updateList(id)
+        viewModelScope.launch {
+            transferMemorySource.observeTransferEvent().collect {
+                if (it is Transfer.UpdateHomeSelectBuy) updateList(it.id)
             }
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        mainViewModelHolder.viewModelRef?.get()?.setUpDateSettingBuy = null
-    }
-
     fun setIconTitle(icon: Int) {
-        mainViewModelHolder.viewModelRef?.get()?.setIconTitle(icon)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventIconTitleSource(SetIconTitle(icon))
+        }
     }
 
     fun setTitleName() {
-        mainViewModelHolder.viewModelRef?.get()?.let { mvm ->
-            mvm.setTitleNameMulti()
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventTitleNameSource(TitleName.SetTitleNameMulti())
         }
     }
 
     fun setClickOnTitle(it: ClickOnTitle) {
-        mainViewModelHolder.viewModelRef?.get()?.setClickOnTitle(it)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventClickOnTitleSource(SetClickOnTitle(it))
+        }
     }
 
     fun updateList() {
@@ -121,7 +126,9 @@ class BuyViewModel(
     }
 
     fun setSubTitleName(name: String) {
-        mainViewModelHolder.viewModelRef?.get()?.setSubTitleName(name)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventSubTitleNameSource(SetSubTitleName(name))
+        }
     }
 
     override fun onClick(data: TypeOnClick): Any? {

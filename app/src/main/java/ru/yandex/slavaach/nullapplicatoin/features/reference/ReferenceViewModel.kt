@@ -3,7 +3,6 @@ package ru.yandex.slavaach.nullapplicatoin.features.reference
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.launch
 import ru.yandex.slavaach.nullapplicatoin.ActivityContextHolder
-import ru.yandex.slavaach.nullapplicatoin.MainViewModelHolder
 import ru.yandex.slavaach.nullapplicatoin.R
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.OnClickAddDefaltBottomBar
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.OnClickDeleteDefaltBottomBar
@@ -12,10 +11,17 @@ import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.TypeBottomBar
 import ru.yandex.slavaach.nullapplicatoin.component.list.TypeListComponent
 import ru.yandex.slavaach.nullapplicatoin.component.list.comp.ReferenceListComponent
 import ru.yandex.slavaach.nullapplicatoin.component.topBar.ClickOnTitle
+import ru.yandex.slavaach.nullapplicatoin.component.topBar.DefaltTopAppBarUseCase
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.Alert
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.AlertManager
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.BaseViewModel
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.TypeOnClick
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetClickOnTitle
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetIconTitle
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetSubTitleName
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TitleName
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.Transfer
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TransferMemorySource
 import ru.yandex.slavaach.nullapplicatoin.features.reference.data.ReferenceUseCase
 import timber.log.Timber
 
@@ -23,7 +29,8 @@ class ReferenceViewModel(
     var referenceUseCase: ReferenceUseCase,
     val alertManager: AlertManager,
     val activityContextHolder: ActivityContextHolder,
-    val mainViewModelHolder: MainViewModelHolder,
+    val transferMemorySource: TransferMemorySource,
+    val defaltTopAppBarUseCase: DefaltTopAppBarUseCase,
 ) : BaseViewModel() {
     val state = mutableStateOf(
         State(
@@ -53,18 +60,26 @@ class ReferenceViewModel(
     }
 
     fun setTitleName(name: String) {
-        mainViewModelHolder.viewModelRef?.get()?.setTitleName(name)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventTitleNameSource(TitleName.SetTitleName(name))
+        }
     }
     fun setSubTitleName(name: String) {
-        mainViewModelHolder.viewModelRef?.get()?.setSubTitleName(name)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventSubTitleNameSource(SetSubTitleName(name))
+        }
     }
 
     fun setIconTitle(icon: Int) {
-        mainViewModelHolder.viewModelRef?.get()?.setIconTitle(icon)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventIconTitleSource(SetIconTitle(icon))
+        }
     }
 
     fun setClickOnTitle(it: ClickOnTitle) {
-        mainViewModelHolder.viewModelRef?.get()?.setClickOnTitle(it)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventClickOnTitleSource(SetClickOnTitle(it))
+        }
     }
     fun updateList() {
         viewModelScope.launch {
@@ -128,7 +143,8 @@ class ReferenceViewModel(
                 state.value = state.value.copy(nameForAddOrUpdate = "", sortForAddOrUpdate = -1)
 
                 updateList()
-                mainViewModelHolder.viewModelRef?.get()?.updateList()
+
+                transferMemorySource.emitEvent(Transfer.UpdateHome())
             } catch (e: Exception) {
                 Timber.tag("7777").e("error $e")
             }

@@ -16,6 +16,8 @@ val versionMinor = 7
 val versionPatch = 0
 
 android {
+
+    /*key Saxavat5*/
     namespace = "ru.yandex.slavaach.nullapplicatoin"
     compileSdk = 34
 

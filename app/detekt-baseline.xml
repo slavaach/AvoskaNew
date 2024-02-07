@@ -5,6 +5,8 @@
     <ID>EmptyFunctionBlock:NullBottomBar.kt${}</ID>
     <ID>ImplicitDefaultLocale:AppUnhandledExceptionHandler.kt$AppUnhandledExceptionHandler$String.format( "Ex type: %s Message:%s \n", exNode .javaClass.name, exNode.message )</ID>
     <ID>LongMethod:DefaultTopBar.kt$@OptIn(ExperimentalFoundationApi::class) @Composable fun DefaltTopAppBar(viewModel: MainViewModel)</ID>
+    <ID>LongParameterList:CustomViewModel.kt$CustomViewModel$( var customUseCase: CustomUseCase, val settingUseCase: SettingUseCase, var saleUseCase: SaleUseCase, val alertManager: AlertManager, val activityContextHolder: ActivityContextHolder, val transferMemorySource: TransferMemorySource, val defaltTopAppBarUseCase: DefaltTopAppBarUseCase, )</ID>
+    <ID>LongParameterList:MainViewModel.kt$MainViewModel$( val mainViewModelHolder: MainViewModelHolder, val activityContextHolder: ActivityContextHolder, val homeNav: HomeNav, var homeUseCase: HomeUseCase, val settingUseCase: SettingUseCase, val transferMemorySource: TransferMemorySource, val defaltTopAppBarUseCase: DefaltTopAppBarUseCase, )</ID>
     <ID>MagicNumber:BuyFrgm.kt$BuyFrgm$80</ID>
     <ID>MagicNumber:BuyListComponent.kt$132</ID>
     <ID>MagicNumber:BuyListComponent.kt$20</ID>

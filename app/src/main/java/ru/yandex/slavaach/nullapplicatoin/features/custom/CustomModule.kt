@@ -7,7 +7,7 @@ import ru.yandex.slavaach.nullapplicatoin.features.custom.data.CustomUseCase
 val customModule = module {
 
     viewModel {
-        CustomViewModel(get(), get(), get(), get(), get(), get(),)
+        CustomViewModel(get(), get(), get(), get(), get(), get(), get(),)
     }
 
     single { CustomUseCase(get(),) }

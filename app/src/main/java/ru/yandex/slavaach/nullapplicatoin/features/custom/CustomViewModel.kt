@@ -6,8 +6,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.yandex.slavaach.nullapplicatoin.ActivityContextHolder
-import ru.yandex.slavaach.nullapplicatoin.MainViewModel
-import ru.yandex.slavaach.nullapplicatoin.MainViewModelHolder
 import ru.yandex.slavaach.nullapplicatoin.R
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.OnClickAddDefaltBottomBar
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.OnClickDeleteDefaltBottomBar
@@ -16,10 +14,17 @@ import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.TypeBottomBar
 import ru.yandex.slavaach.nullapplicatoin.component.list.TypeListComponent
 import ru.yandex.slavaach.nullapplicatoin.component.list.comp.CustomListComponent
 import ru.yandex.slavaach.nullapplicatoin.component.topBar.ClickOnTitle
+import ru.yandex.slavaach.nullapplicatoin.component.topBar.DefaltTopAppBarUseCase
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.Alert
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.AlertManager
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.BaseViewModel
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.TypeOnClick
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetClickOnTitle
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetIconTitle
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetSubTitleName
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TitleName
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.Transfer
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TransferMemorySource
 import ru.yandex.slavaach.nullapplicatoin.features.custom.data.Custom
 import ru.yandex.slavaach.nullapplicatoin.features.custom.data.CustomUseCase
 import ru.yandex.slavaach.nullapplicatoin.features.custom.data.SettingUseCase
@@ -33,7 +38,8 @@ class CustomViewModel(
     var saleUseCase: SaleUseCase,
     val alertManager: AlertManager,
     val activityContextHolder: ActivityContextHolder,
-    val mainViewModelHolder: MainViewModelHolder,
+    val transferMemorySource: TransferMemorySource,
+    val defaltTopAppBarUseCase: DefaltTopAppBarUseCase,
 ) : BaseViewModel() {
     val state = mutableStateOf(
         State(
@@ -48,6 +54,7 @@ class CustomViewModel(
     )
 
     var openAddOrUpdate = true // значит открыт диалог добавления
+    var idHome = -1L
 
     data class State(
         val bottomBar: TypeBottomBar,
@@ -65,25 +72,26 @@ class CustomViewModel(
         super.onInit()
         updateList()
         updateSale()
-        mainViewModelHolder.viewModelRef?.get()?.setUpDateSettingHome = object : MainViewModel.upDateSettingHome {
-            override fun update(id: Long) {
-                updateList(id)
+        viewModelScope.launch {
+            transferMemorySource.observeTransferEvent().collect {
+                if (it is Transfer.UpdateHomeSelectCustom) updateList(it.id)
             }
         }
     }
 
     override fun onCleared() {
         super.onCleared()
-        mainViewModelHolder.viewModelRef?.get()?.setUpDateSettingHome = null
     }
     fun setTitleName() {
-        mainViewModelHolder.viewModelRef?.get()?.let { mvm ->
-            mvm.setTitleName(mvm.state.value.nameHomeForCustom)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventTitleNameSource(TitleName.SetTitleNameHome())
         }
     }
 
     fun setClickOnTitle(it: ClickOnTitle) {
-        mainViewModelHolder.viewModelRef?.get()?.setClickOnTitle(it)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventClickOnTitleSource(SetClickOnTitle(it))
+        }
     }
 
     fun updateList() {
@@ -106,6 +114,7 @@ class CustomViewModel(
     }
 
     fun updateList(id: Long) {
+        idHome = id
         viewModelScope.launch {
             _state.value =
                 _state.value.copy(
@@ -123,7 +132,9 @@ class CustomViewModel(
     }
 
     fun setSubTitleName(name: String) {
-        mainViewModelHolder.viewModelRef?.get()?.setSubTitleName(name)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventSubTitleNameSource(SetSubTitleName(name))
+        }
     }
 
     override fun onClick(data: TypeOnClick): Any? {
@@ -175,8 +186,7 @@ class CustomViewModel(
     }
 
     fun add() {
-        val home = mainViewModelHolder.viewModelRef?.get()?.state?.value?.idHomeForCustom
-        if (home == null) return
+        if (idHome == null) return
         viewModelScope.launch {
             try {
                 val idForUpdate = if (openAddOrUpdate) {
@@ -187,7 +197,7 @@ class CustomViewModel(
                 val cs = Custom(
                     id = idForUpdate,
                     name = state.value.nameForAddOrUpdate,
-                    home = home,
+                    home = idHome,
                     sale = state.value.idSale,
                 )
                 customUseCase.add(cs)
@@ -209,7 +219,9 @@ class CustomViewModel(
     }
 
     fun setIconTitle(icon: Int) {
-        mainViewModelHolder.viewModelRef?.get()?.setIconTitle(icon)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventIconTitleSource(SetIconTitle(icon))
+        }
     }
 
     fun setSelected(item: TypeListComponent) {

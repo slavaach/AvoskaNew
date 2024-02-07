@@ -6,6 +6,6 @@ import org.koin.dsl.module
 val buyModule = module {
 
     viewModel {
-        BuyViewModel(get(), get(), get(), get(),)
+        BuyViewModel(get(), get(), get(), get(), get(),)
     }
 }

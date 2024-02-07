@@ -3,20 +3,24 @@ package ru.yandex.slavaach.nullapplicatoin.features.weather
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.launch
 import ru.yandex.slavaach.nullapplicatoin.ActivityContextHolder
-import ru.yandex.slavaach.nullapplicatoin.MainViewModelHolder
 import ru.yandex.slavaach.nullapplicatoin.R
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.TypeBottomBar
 import ru.yandex.slavaach.nullapplicatoin.component.list.comp.WeatherListConponent
 import ru.yandex.slavaach.nullapplicatoin.component.topBar.ClickOnTitle
+import ru.yandex.slavaach.nullapplicatoin.component.topBar.DefaltTopAppBarUseCase
 import ru.yandex.slavaach.nullapplicatoin.core.domain.ErrorEntity
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.BaseViewModel
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetClickOnTitle
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetIconTitle
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.SetSubTitleName
+import ru.yandex.slavaach.nullapplicatoin.core.presentation.event.TitleName
 import ru.yandex.slavaach.nullapplicatoin.features.weather.data.Weather
 import timber.log.Timber
 
 class WeatherViewModel(
     val weatherUseCase: WeatherUseCase,
     val activityContextHolder: ActivityContextHolder,
-    val mainViewModelHolder: MainViewModelHolder,
+    val defaltTopAppBarUseCase: DefaltTopAppBarUseCase,
 ) : BaseViewModel() {
 
     val state = mutableStateOf(
@@ -65,19 +69,27 @@ class WeatherViewModel(
         }
     }
     fun setTitleName(name: String) {
-        mainViewModelHolder.viewModelRef?.get()?.setTitleName(name)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventTitleNameSource(TitleName.SetTitleName(name))
+        }
     }
 
     fun setIconTitle(icon: Int) {
-        mainViewModelHolder.viewModelRef?.get()?.setIconTitle(icon)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventIconTitleSource(SetIconTitle(icon))
+        }
     }
 
     fun setSubTitleName(name: String) {
-        mainViewModelHolder.viewModelRef?.get()?.setSubTitleName(name)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventSubTitleNameSource(SetSubTitleName(name))
+        }
     }
 
     fun setClickOnTitle(it: ClickOnTitle) {
-        mainViewModelHolder.viewModelRef?.get()?.setClickOnTitle(it)
+        viewModelScope.launch {
+            defaltTopAppBarUseCase.emitEventClickOnTitleSource(SetClickOnTitle(it))
+        }
     }
 
     data class State(
