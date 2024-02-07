@@ -20,6 +20,7 @@ import org.koin.core.parameter.parametersOf
 import ru.yandex.slavaach.nullapplicatoin.R
 import ru.yandex.slavaach.nullapplicatoin.component.topBar.ClickOnTitle
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.BaseFrgm
+import ru.yandex.slavaach.nullapplicatoin.core.ui.EnterAnimation
 import ru.yandex.slavaach.nullapplicatoin.features.reference.data.ReferenceUseCase
 
 class ReferenceFrgm(
@@ -29,7 +30,7 @@ class ReferenceFrgm(
 
     @Composable
     override fun Content() {
-        GetView(name = name)
+        EnterAnimation{GetView(name = name)}
     }
 
     @Composable

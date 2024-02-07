@@ -21,12 +21,13 @@ import org.koin.androidx.compose.koinViewModel
 import ru.yandex.slavaach.nullapplicatoin.R
 import ru.yandex.slavaach.nullapplicatoin.component.topBar.ClickOnTitle
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.base.BaseFrgm
+import ru.yandex.slavaach.nullapplicatoin.core.ui.EnterAnimation
 
 class BuyFrgm : BaseFrgm(), Screen {
 
     @Composable
     override fun Content() {
-        GetView()
+        EnterAnimation{ GetView()}
     }
 
     @Composable
