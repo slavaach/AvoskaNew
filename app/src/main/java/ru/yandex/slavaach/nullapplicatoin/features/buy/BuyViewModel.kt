@@ -1,6 +1,7 @@
 package ru.yandex.slavaach.nullapplicatoin.features.buy
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.OnClickFilterBuyBottomBar
 import ru.yandex.slavaach.nullapplicatoin.component.bottomBar.OnClickOrderBuyBottomBar

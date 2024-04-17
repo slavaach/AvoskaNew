@@ -1,6 +1,7 @@
 package ru.yandex.slavaach.nullapplicatoin.features.custom
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -52,6 +53,12 @@ class CustomViewModel(
             nameSale = ""
         )
     )
+
+    val _sale = MutableStateFlow(
+        SaleList(listOf())
+    )
+
+    val stateSale: StateFlow<SaleList> = _sale.asStateFlow()
 
     var openAddOrUpdate = true // значит открыт диалог добавления
     var idHome = -1L
@@ -280,11 +287,6 @@ class CustomViewModel(
 
     data class SaleList(val list: List<Sale>)
 
-    val _sale = MutableStateFlow(
-        SaleList(listOf())
-    )
-
-    val stateSale: StateFlow<SaleList> = _sale.asStateFlow()
 
     fun updateSale() {
         viewModelScope.launch {

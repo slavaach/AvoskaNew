@@ -3,6 +3,7 @@ package ru.yandex.slavaach.nullapplicatoin
 import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.viewModelScope
 import cafe.adriel.voyager.navigator.Navigator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,6 +33,12 @@ class MainViewModel(
     val transferMemorySource: TransferMemorySource,
     val defaltTopAppBarUseCase: DefaltTopAppBarUseCase,
 ) : BaseViewModel(), KoinComponent {
+
+    val _home = MutableStateFlow(
+        HomeList(listOf())
+    )
+
+    val stateHome: StateFlow<HomeList> = _home.asStateFlow()
 
     val state = mutableStateOf(
         State(
@@ -106,12 +113,6 @@ class MainViewModel(
     }
 
     data class HomeList(val list: List<Home>)
-
-    val _home = MutableStateFlow(
-        HomeList(listOf())
-    )
-
-    val stateHome: StateFlow<HomeList> = _home.asStateFlow()
 
     fun setHomeForBuy() {
         viewModelScope.launch { settingUseCase.update(state.value.idHomeForBuy) }

@@ -1,6 +1,7 @@
 package ru.yandex.slavaach.nullapplicatoin.features.weather
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.yandex.slavaach.nullapplicatoin.ActivityContextHolder
 import ru.yandex.slavaach.nullapplicatoin.R

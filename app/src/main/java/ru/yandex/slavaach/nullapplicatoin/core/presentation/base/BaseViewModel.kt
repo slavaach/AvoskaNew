@@ -17,15 +17,12 @@ import timber.log.Timber
 
 abstract class BaseViewModel : ViewModel(), KoinComponent {
 
-    private val viewModelJob = SupervisorJob()
-
     protected val errorResolver: ErrorResolver by inject()
 
     open fun onClick(data: TypeOnClick): Any? {
         return null
     }
 
-    val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     fun callError(e: ErrorEntity) {
         errorResolver.callError(e)
@@ -46,6 +43,5 @@ abstract class BaseViewModel : ViewModel(), KoinComponent {
     override fun onCleared() {
         Timber.tag("7777").v("%s onCleared", javaClass.simpleName)
         super.onCleared()
-        viewModelJob.cancelChildren()
     }
 }
