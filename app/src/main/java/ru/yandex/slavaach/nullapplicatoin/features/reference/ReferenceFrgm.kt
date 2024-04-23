@@ -30,7 +30,7 @@ class ReferenceFrgm(
 
     @Composable
     override fun Content() {
-        EnterAnimation{GetView(name = name)}
+        EnterAnimation { GetView(name = name) }
     }
 
     @Composable

@@ -27,7 +27,7 @@ fun EnterAnimation(content: @Composable () -> Unit) {
         ) + expandVertically(
             expandFrom = Alignment.Top,
             animationSpec = tween(durationMillis = 300, easing = LinearEasing)
-        ) + fadeIn(initialAlpha = 3f , animationSpec = tween(durationMillis = 3000, easing = LinearEasing)),
+        ) + fadeIn(initialAlpha = 3f, animationSpec = tween(durationMillis = 3000, easing = LinearEasing)),
         exit = slideOutVertically(
             targetOffsetY = { -40 },
             animationSpec = tween(durationMillis = 3000, easing = LinearEasing)

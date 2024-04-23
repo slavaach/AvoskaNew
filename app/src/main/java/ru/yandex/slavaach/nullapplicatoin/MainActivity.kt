@@ -19,8 +19,6 @@ import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import cafe.adriel.voyager.transitions.ScaleTransition
-import cafe.adriel.voyager.transitions.SlideTransition
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.yandex.slavaach.nullapplicatoin.core.presentation.InfoDialog
 import ru.yandex.slavaach.nullapplicatoin.core.theme.MyApplicationTheme
@@ -42,8 +40,9 @@ class MainActivity : AppCompatActivity() {
                 onBackPressed = { currentScreen ->
                     true // won't pop the current screen
                     // true will pop, default behavior
-                }) {
-                //ScaleTransition(it)
+                }
+            ) {
+                // ScaleTransition(it)
                 MyApplicationTheme {
                     // A surface container using the 'background' color from the theme
                     Surface(

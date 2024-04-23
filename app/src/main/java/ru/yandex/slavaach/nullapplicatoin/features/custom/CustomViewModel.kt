@@ -287,7 +287,6 @@ class CustomViewModel(
 
     data class SaleList(val list: List<Sale>)
 
-
     fun updateSale() {
         viewModelScope.launch {
             _sale.value =

@@ -34,7 +34,7 @@ fun ScaleTransition(
             }
 
             scaleIn(initialScale = initialScale, animationSpec = animationSpec) togetherWith
-                    scaleOut(targetScale = targetScale, animationSpec = animationSpec)
+                scaleOut(targetScale = targetScale, animationSpec = animationSpec)
         }
     )
 }

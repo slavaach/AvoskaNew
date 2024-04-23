@@ -27,7 +27,7 @@ class BuyFrgm : BaseFrgm(), Screen {
 
     @Composable
     override fun Content() {
-        EnterAnimation{ GetView()}
+        EnterAnimation { GetView() }
     }
 
     @Composable
